@@ -1,0 +1,384 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #ffffff;
+  background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.65)
+    ),
+  url("images/starlinks-background1.png");
+  min-height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+
+  margin: 0;
+  color: #fff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.65)),
+    url("images/starlinks-background1.png");
+
+  background-size: cover;
+  background-position: center;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    background:
+        radial-gradient(
+            ellipse at left,
+            rgba(22, 88, 255, 0.35),
+            transparent 60%
+        ),
+        radial-gradient(
+            ellipse at right,
+            rgba(139, 92, 246, 0.35),
+            transparent 60%
+        );
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+
+  background: transparent;
+}
+
+/* Create many tiny stars */
+
+.stars::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;   /* size of each star */
+  height: 32px;
+  background-image: url("images/icons/process-icons-star.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  box-shadow:
+    100px 200px,
+    300px 400px,
+    600px 150px,
+    900px 300px,
+    1200px 500px;
+
+  animation: moveStarsSlow 120s linear infinite;
+  opacity: 0.5; /* dimmer = farther away */
+  transform: scale(0.7);
+
+}
+
+.stars::after {
+content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;   /* size of each star */
+  height: 32px;
+  background-image: url("images/icons/process-icons-star.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  box-shadow:
+    100px 200px,
+    300px 400px,
+    600px 150px,
+    900px 300px,
+    1200px 500px;
+
+  animation: moveStarsFast 60s linear infinite;
+  opacity: 0.9;
+
+}
+
+@keyframes moveStarsSlow {
+  from {
+    transform: translateY(0) scale(0.7);
+  }
+  to {
+    transform: translateY(-1000px) scale(0.7);
+  }
+}
+
+@keyframes moveStarsFast {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1500px);
+  }
+}
+
+#star-canvas{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;              /* stars */
+}
+
+/* Make sure your actual page content sits above the stars */
+.site-header, .hero, section, .process {
+  position: relative;
+  z-index: 1;
+}
+
+/* -----------------
+   HEADER
+------------------*/
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.4)
+  );
+
+  backdrop-filter: blur(3px);
+  z-index: 10;
+
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(22, 88, 255, 0.6),
+    transparent
+  );
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.logo img {
+  height: 80px;   /* Adjust size here */
+  width: auto;
+  display: block;
+}
+
+
+.nav a {
+  margin-left: 32px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  opacity: 0.85;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+/* -----------------
+   HERO / MISSION
+------------------*/
+.hero {
+  min-height: calc(60vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 60px;
+
+/* Local background image */
+  background:
+    linear-gradient(
+      rgba(5, 10, 25, 0.50)
+    ),
+}
+
+.hero-content {
+  max-width: 900px;
+  padding: 40px;
+  
+}
+
+.hero h1 {
+  font-size: 42px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.hero h1 span {
+  color: rgba(22, 88, 255);
+}
+
+/* -----------------
+   CTA BUTTON
+------------------*/
+.cta-button {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 14px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(22, 88, 255),
+    #8b5cf6
+  );
+
+  box-shadow: 0 0 30px rgba(45, 212, 255, 0.35);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+}
+
+
+.section-divider {
+    width: 100%;
+    height: 6px;
+    margin: 40px 0;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(22, 88, 255, 0.6),
+        rgba(139, 92, 246, 0.6),
+        transparent
+    );
+}
+/* -----------------
+   PROCESS SECTION
+------------------*/
+/* Process section header */
+.process-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.process-header h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.process-header p {
+  font-size: 20px;
+  opacity: 0.75;
+  margin-top: 0px;
+}
+
+.process {
+  padding: 40x 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Glass card style */
+.process-card {
+  padding: 28px 20px;
+  text-align: center;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 30px rgba(108, 242, 255, 0.15);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.process-card:hover {
+  transform: translateY(-30px);
+  box-shadow: 0 0 45px rgba(138, 92, 246, 0.507);
+}
+
+/* Icon */
+.process-icon {
+  width: 100px;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+/* Text */
+.process-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.process-card p {
+  font-size: 13px;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
